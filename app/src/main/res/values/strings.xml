@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TrainingApp</string>
+    <string name="home_button">Home Button</string>
+    <string name="my_training">My trainings</string>
+    <!--
+    Bottom Bar button text
+    -->
+    <string name="button_home_text">Home</string>
+    <string name="button_training_text">My trainings</string>
+</resources>

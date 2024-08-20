@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.BottomAppBar
@@ -40,6 +42,9 @@ import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 fun TrainingAppScaffold(){
     val navController = rememberNavController()
 
+    var Selected by remember {
+        mutableStateOf(true)
+    }
     Scaffold (
         bottomBar = {
           BottomAppBar(
@@ -48,21 +53,38 @@ fun TrainingAppScaffold(){
                       horizontalArrangement = Arrangement.SpaceEvenly,
                       modifier = Modifier.fillMaxWidth()
                   ) {
+                    //TODO refactor this
+                      if (Selected){
+                          IconMenuButton(
+                              onClick = { navController.navigate(AppScreens.TrainingScreen.route) },
+                              description = R.string.home_button,
+                              icon = Icons.Filled.Home,
+                              iconName = stringResource(id = R.string.button_home_text)
+                          )
 
-                      IconMenuButton(
-                          onClick = { navController.navigate(AppScreens.TrainingScreen.route) },
-                          description = R.string.home_button,
-                          icon = Icons.Filled.Home,
-                          iconName = stringResource(id = R.string.button_home_text)
-                      )
+                          IconMenuButton(
+                              onClick = { navController.navigate(AppScreens.StarScreen.route)
+                                        Selected = false},
+                              description = R.string.my_training,
+                              icon = Icons.Outlined.Email,
+                              iconName = stringResource(id = R.string.button_training_text)
+                          )
+                      }else{
+                          IconMenuButton(
+                              onClick = { navController.navigate(AppScreens.TrainingScreen.route)
+                                        Selected = true},
+                              description = R.string.home_button,
+                              icon = Icons.Outlined.Home,
+                              iconName = stringResource(id = R.string.button_home_text)
+                          )
 
-                      IconMenuButton(
-                          onClick = { navController.navigate(AppScreens.StarScreen.route) },
-                          description = R.string.my_training,
-                          icon = Icons.Filled.Star,
-                          iconName = stringResource(id = R.string.button_training_text)
-                      )
-
+                          IconMenuButton(
+                              onClick = { navController.navigate(AppScreens.StarScreen.route) },
+                              description = R.string.my_training,
+                              icon = Icons.Filled.Email,
+                              iconName = stringResource(id = R.string.button_training_text)
+                          )
+                      }
                   }
               }
           )

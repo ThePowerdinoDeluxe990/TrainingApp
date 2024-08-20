@@ -1,4 +1,4 @@
-package com.powerdino.trainingapp.ui.screens
+package com.powerdino.trainingapp.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement

@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,14 +12,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 import com.powerdino.trainingapp.R
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
-import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 
 
 @Composable
 fun TrainingScreen(){
-    Column {
+    Column (
+    ){
 
         Text(
             text = stringResource(id = R.string.my_training_title),
@@ -45,14 +47,12 @@ fun TrainingScreen(){
 
     }
 }
-// TODO add custom material theme
 
 
 @Preview(
     showBackground = true,
     name = "black tablet",
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL,
-    backgroundColor = 0xFF0C0C0C,
     device = "id:pixel_tablet"
 )
 @Preview(
@@ -61,7 +61,6 @@ fun TrainingScreen(){
 @Preview(
     showBackground = true,
     name = "black phone",
-    backgroundColor = 0xFF0C0C0C,
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL,
     device = "id:pixel_7"
 )
@@ -72,6 +71,8 @@ fun TrainingScreen(){
 @Composable
 private fun Preview() {
     TrainingAppTheme {
-        TrainingScreen()
+        Surface {
+            TrainingScreen()
+        }
     }
 }

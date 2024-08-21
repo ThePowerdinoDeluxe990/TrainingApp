@@ -1,5 +1,6 @@
 package com.powerdino.trainingapp.ui.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -23,7 +24,8 @@ fun TrainingScreen(){
             text = stringResource(id = R.string.my_training_title),
             style = MaterialTheme.typography.displayMedium,
             modifier = Modifier.padding( 6.dp ),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
 
         TrainingMenuComposable(
@@ -46,10 +48,30 @@ fun TrainingScreen(){
 
 
 
-@Preview(showBackground = true, device = "id:pixel_tablet")
-@Preview(showBackground = true, device = "id:pixel_7")
+@Preview(
+    showBackground = true,
+    name = "black tablet",
+    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL,
+    backgroundColor = 0xFF0C0C0C,
+    device = "id:pixel_tablet"
+)
+@Preview(
+    device = "id:pixel_tablet", showBackground = true, backgroundColor = 0xFFFFFFFF,
+)
+@Preview(
+    showBackground = true,
+    name = "black phone",
+    backgroundColor = 0xFF0C0C0C,
+    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL,
+    device = "id:pixel_7"
+)
+@Preview(
+    showBackground = true,
+    device = "id:pixel_7"
+)
 @Composable
 private fun Preview() {
     TrainingAppTheme {
+        TrainingScreen()
     }
 }

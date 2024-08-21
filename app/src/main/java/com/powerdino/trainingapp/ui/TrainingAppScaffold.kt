@@ -10,13 +10,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -27,8 +26,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,9 +43,10 @@ import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 fun TrainingAppScaffold(){
     val navController = rememberNavController()
 
-    var Selected by remember {
+    var bottomSelected by remember {
         mutableStateOf(true)
     }
+
     Scaffold (
         bottomBar = {
           BottomAppBar(
@@ -53,42 +55,53 @@ fun TrainingAppScaffold(){
                       horizontalArrangement = Arrangement.SpaceEvenly,
                       modifier = Modifier.fillMaxWidth()
                   ) {
-                    //TODO refactor this
-                      if (Selected){
+                      //Logic of bottom bar
+                      if (bottomSelected){
                           IconMenuButton(
                               onClick = { navController.navigate(AppScreens.TrainingScreen.route) },
                               description = R.string.home_button,
                               icon = Icons.Filled.Home,
-                              iconName = stringResource(id = R.string.button_home_text)
+                              iconName = stringResource(id = R.string.button_home_text),
+                              color = MaterialTheme.colorScheme.secondaryContainer,
+                              fontWeight = FontWeight.Bold
                           )
 
                           IconMenuButton(
-                              onClick = { navController.navigate(AppScreens.StarScreen.route)
-                                        Selected = false},
+                              onClick = {
+                                  navController.navigate(AppScreens.StarScreen.route)
+                                  bottomSelected = false
+                                },
                               description = R.string.my_training,
                               icon = Icons.Outlined.Email,
-                              iconName = stringResource(id = R.string.button_training_text)
+                              iconName = stringResource(id = R.string.button_training_text),
+                              color = MaterialTheme.colorScheme.surface,
+                              fontWeight = FontWeight.Normal
                           )
                       }else{
                           IconMenuButton(
-                              onClick = { navController.navigate(AppScreens.TrainingScreen.route)
-                                        Selected = true},
+                              onClick = {
+                                  navController.navigate(AppScreens.TrainingScreen.route)
+                                  bottomSelected = true
+                                },
                               description = R.string.home_button,
                               icon = Icons.Outlined.Home,
-                              iconName = stringResource(id = R.string.button_home_text)
+                              iconName = stringResource(id = R.string.button_home_text),
+                              color = MaterialTheme.colorScheme.surface,
+                              fontWeight = FontWeight.Normal
                           )
 
                           IconMenuButton(
                               onClick = { navController.navigate(AppScreens.StarScreen.route) },
                               description = R.string.my_training,
                               icon = Icons.Filled.Email,
-                              iconName = stringResource(id = R.string.button_training_text)
+                              iconName = stringResource(id = R.string.button_training_text),
+                              color = MaterialTheme.colorScheme.secondaryContainer,
+                              fontWeight = FontWeight.Bold
                           )
                       }
                   }
               }
           )
-
         }
     ){ innerPadding ->
         Column(
@@ -115,19 +128,30 @@ fun TrainingAppScaffold(){
     }
 }
 
+
 @Composable
 fun IconMenuButton(
     onClick:() -> Unit,
     @StringRes description:Int,
     icon:ImageVector,
-    iconName:String
+    iconName:String,
+    color:Color,
+    fontWeight: FontWeight
 ){
     Column (
         modifier = Modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ){
-        IconButton(onClick = onClick) {
+        IconButton(
+            onClick = onClick,
+            colors = IconButtonColors(
+               containerColor = color,
+                contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                disabledContentColor = MaterialTheme.colorScheme.onSecondary,
+                disabledContainerColor = MaterialTheme.colorScheme.onSecondary
+            )
+        ) {
             Icon(
                 imageVector = icon,
                 contentDescription = stringResource(id = description)
@@ -136,7 +160,8 @@ fun IconMenuButton(
 
         Text(
             text = iconName,
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.bodySmall,
+            fontWeight = fontWeight
         )
     }
 }

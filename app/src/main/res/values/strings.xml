@@ -2,6 +2,8 @@
     <string name="app_name">TrainingApp</string>
     <string name="home_button">Home Button</string>
     <string name="my_training">My trainings</string>
+
+    <string name="my_training_title">Trainings</string>
     <!--
     Bottom Bar button text
     -->

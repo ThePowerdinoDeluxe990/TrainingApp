@@ -6,9 +6,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.powerdino.trainingapp.R
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 
@@ -18,11 +20,12 @@ fun TrainingScreen(){
     Column {
 
         Text(
-            text = "Trainings",
+            text = stringResource(id = R.string.my_training_title),
             style = MaterialTheme.typography.displayMedium,
             modifier = Modifier.padding( 6.dp ),
             fontWeight = FontWeight.Bold
         )
+
         TrainingMenuComposable(
             trainingName = "Example 1",
             trainingDescription = "Lorem Ipsum"

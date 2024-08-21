@@ -45,7 +45,7 @@ fun TrainingScreen(){
 
     }
 }
-
+// TODO add custom material theme
 
 
 @Preview(

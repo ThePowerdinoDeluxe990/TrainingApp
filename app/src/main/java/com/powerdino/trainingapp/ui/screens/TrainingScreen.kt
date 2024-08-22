@@ -19,9 +19,7 @@ import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
 
 @Composable
 fun TrainingScreen(){
-    Column (
-    ){
-
+    Column{
         Text(
             text = stringResource(id = R.string.my_training_title),
             style = MaterialTheme.typography.displayMedium,
@@ -32,17 +30,23 @@ fun TrainingScreen(){
 
         TrainingMenuComposable(
             trainingName = "Example 1",
-            trainingDescription = "Lorem Ipsum"
+            trainingDescription = "Lorem Ipsum",
+            borderColor = MaterialTheme.colorScheme.primaryContainer,
+            borderSize = 0.dp
         )
 
         TrainingMenuComposable(
             trainingName = "Example 2",
-            trainingDescription = "Lorem Ipsum"
+            trainingDescription = "Lorem Ipsum",
+            borderColor = MaterialTheme.colorScheme.primaryContainer,
+            borderSize = 0.dp
         )
 
         TrainingMenuComposable(
             trainingName = "Example 3",
-            trainingDescription = "Lorem Ipsum"
+            trainingDescription = "Lorem Ipsum" ,
+            borderColor = MaterialTheme.colorScheme.primaryContainer,
+            borderSize = 0.dp
         )
 
     }

@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -58,7 +59,7 @@ fun TrainingAppScaffold(){
                       //Logic of bottom bar
                       if (bottomSelected){
                           IconMenuButton(
-                              onClick = { navController.navigate(AppScreens.TrainingScreen.route) },
+                              onClick = { navController.navigate(AppScreens.TrainingScreen) },
                               description = R.string.home_button,
                               icon = Icons.Filled.Home,
                               iconName = stringResource(id = R.string.button_home_text),
@@ -68,7 +69,7 @@ fun TrainingAppScaffold(){
 
                           IconMenuButton(
                               onClick = {
-                                  navController.navigate(AppScreens.StarScreen.route)
+                                  navController.navigate(AppScreens.StarScreen)
                                   bottomSelected = false
                                 },
                               description = R.string.my_training,
@@ -80,7 +81,7 @@ fun TrainingAppScaffold(){
                       }else{
                           IconMenuButton(
                               onClick = {
-                                  navController.navigate(AppScreens.TrainingScreen.route)
+                                  navController.navigate(AppScreens.TrainingScreen)
                                   bottomSelected = true
                                 },
                               description = R.string.home_button,
@@ -91,7 +92,7 @@ fun TrainingAppScaffold(){
                           )
 
                           IconMenuButton(
-                              onClick = { navController.navigate(AppScreens.StarScreen.route) },
+                              onClick = { navController.navigate(AppScreens.StarScreen) },
                               description = R.string.my_training,
                               icon = Icons.Filled.Email,
                               iconName = stringResource(id = R.string.button_training_text),
@@ -109,24 +110,22 @@ fun TrainingAppScaffold(){
         ) {
             NavHost(
                 navController = navController,
-                startDestination = AppScreens.TrainingScreen.route,
-
-                ){
-                composable(
-                    route = AppScreens.TrainingScreen.route
-                ){
+                startDestination = AppScreens.TrainingScreen,
+            ){
+                composable<AppScreens.TrainingScreen>{
                     TrainingScreen()
                 }
 
-                composable(
-                    route = AppScreens.StarScreen.route
-                ){
+                composable<AppScreens.StarScreen>{
                     StarScreen()
                 }
+
             }
         }
     }
 }
+
+
 
 
 @Composable

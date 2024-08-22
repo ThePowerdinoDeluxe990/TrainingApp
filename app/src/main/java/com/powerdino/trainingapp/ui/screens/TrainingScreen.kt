@@ -32,21 +32,24 @@ fun TrainingScreen(){
             trainingName = "Example 1",
             trainingDescription = "Lorem Ipsum",
             borderColor = MaterialTheme.colorScheme.primaryContainer,
-            borderSize = 0.dp
+            borderSize = 0.dp,
+            {}
         )
-
+        //TODO FINISH THIS
         TrainingMenuComposable(
             trainingName = "Example 2",
             trainingDescription = "Lorem Ipsum",
             borderColor = MaterialTheme.colorScheme.primaryContainer,
-            borderSize = 0.dp
+            borderSize = 0.dp,
+            {}
         )
 
         TrainingMenuComposable(
             trainingName = "Example 3",
             trainingDescription = "Lorem Ipsum" ,
             borderColor = MaterialTheme.colorScheme.primaryContainer,
-            borderSize = 0.dp
+            borderSize = 0.dp,
+            {}
         )
 
     }

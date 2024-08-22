@@ -1,6 +1,7 @@
 package com.powerdino.trainingapp.ui.screens.composables
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,7 +23,8 @@ fun TrainingMenuComposable(
     trainingName:String,
     trainingDescription:String,
     borderColor:Color,
-    borderSize:Dp
+    borderSize:Dp,
+    clickAction:() -> Unit
 ){
     Card (
         elevation = CardDefaults.cardElevation(
@@ -34,7 +36,8 @@ fun TrainingMenuComposable(
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(10.dp),
+        onClick = clickAction
     ){
         Column (
             modifier = Modifier.padding(5.dp)
@@ -64,7 +67,8 @@ private fun Preview() {
             "Example",
             "Lorem Ipsum",
             MaterialTheme.colorScheme.surface,
-            0.dp
+            0.dp,
+            {}
         )
     }
 }

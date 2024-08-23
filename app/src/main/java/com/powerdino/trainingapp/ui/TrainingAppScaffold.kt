@@ -1,5 +1,6 @@
 package com.powerdino.trainingapp.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,7 +33,6 @@ import com.powerdino.trainingapp.ui.screens.StarScreen
 import com.powerdino.trainingapp.ui.screens.TrainingScreen
 import com.powerdino.trainingapp.ui.screens.composables.IconMenuButton
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
-
 @Composable
 fun TrainingAppScaffold(){
     val navController = rememberNavController()
@@ -98,28 +98,30 @@ fun TrainingAppScaffold(){
           )
         }
     ){ innerPadding ->
-        Column(
-            modifier = Modifier.padding(innerPadding)
-        ) {
+
             NavHost(
                 navController = navController,
                 startDestination = AppScreens.TrainingScreen,
             ){
                 composable<AppScreens.TrainingScreen>{
                     TrainingScreen(
-                        navController
+                        navController,
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
 
                 composable<AppScreens.StarScreen>{
-                    StarScreen()
+                    StarScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
 
                 composable<AppScreens.ArgScreenOfTrainings>{
                     val args = it.toRoute<AppScreens.ArgScreenOfTrainings>()
-                    ExercisesListScreen()
+                    ExercisesListScreen(
+                        navController
+                    )
                 }
-            }
         }
     }
 }

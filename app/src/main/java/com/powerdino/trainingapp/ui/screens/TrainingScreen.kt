@@ -21,9 +21,12 @@ import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
 
 @Composable
 fun TrainingScreen(
-    navController: NavController?
+    navController: NavController?,
+    modifier: Modifier
 ){
-    Column{
+    Column(
+        modifier = modifier
+    ){
         Text(
             text = stringResource(id = R.string.my_training_title),
             style = MaterialTheme.typography.displayMedium,
@@ -81,7 +84,8 @@ private fun Preview() {
     TrainingAppTheme {
         Surface {
             TrainingScreen(
-                null
+                null,
+                modifier = Modifier
             )
         }
     }

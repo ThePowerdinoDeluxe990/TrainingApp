@@ -12,13 +12,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 import com.powerdino.trainingapp.R
+import com.powerdino.trainingapp.ui.AppScreens
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
 
 
 @Composable
-fun TrainingScreen(){
+fun TrainingScreen(
+    navController: NavController?
+){
     Column{
         Text(
             text = stringResource(id = R.string.my_training_title),
@@ -33,24 +37,21 @@ fun TrainingScreen(){
             trainingDescription = "Lorem Ipsum",
             borderColor = MaterialTheme.colorScheme.primaryContainer,
             borderSize = 0.dp,
-            {}
-        )
-        //TODO FINISH THIS
+        ){ navController?.navigate(AppScreens.ArgScreenOfTrainings("Name")) }
+
         TrainingMenuComposable(
             trainingName = "Example 2",
             trainingDescription = "Lorem Ipsum",
             borderColor = MaterialTheme.colorScheme.primaryContainer,
-            borderSize = 0.dp,
-            {}
-        )
+            borderSize = 0.dp
+        ) { navController?.navigate(AppScreens.ArgScreenOfTrainings("Name")) }
 
         TrainingMenuComposable(
             trainingName = "Example 3",
             trainingDescription = "Lorem Ipsum" ,
             borderColor = MaterialTheme.colorScheme.primaryContainer,
-            borderSize = 0.dp,
-            {}
-        )
+            borderSize = 0.dp
+        ) { navController?.navigate(AppScreens.ArgScreenOfTrainings("Name")) }
 
     }
 }
@@ -79,7 +80,9 @@ fun TrainingScreen(){
 private fun Preview() {
     TrainingAppTheme {
         Surface {
-            TrainingScreen()
+            TrainingScreen(
+                null
+            )
         }
     }
 }

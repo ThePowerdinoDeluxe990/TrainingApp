@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.powerdino.trainingapp.R
 import com.powerdino.trainingapp.ui.screens.ExercisesListScreen
 import com.powerdino.trainingapp.ui.screens.StarScreen
@@ -105,7 +106,9 @@ fun TrainingAppScaffold(){
                 startDestination = AppScreens.TrainingScreen,
             ){
                 composable<AppScreens.TrainingScreen>{
-                    TrainingScreen()
+                    TrainingScreen(
+                        navController
+                    )
                 }
 
                 composable<AppScreens.StarScreen>{
@@ -113,6 +116,7 @@ fun TrainingAppScaffold(){
                 }
 
                 composable<AppScreens.ArgScreenOfTrainings>{
+                    val args = it.toRoute<AppScreens.ArgScreenOfTrainings>()
                     ExercisesListScreen()
                 }
             }

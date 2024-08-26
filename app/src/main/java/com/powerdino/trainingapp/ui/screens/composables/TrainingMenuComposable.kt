@@ -1,7 +1,6 @@
 package com.powerdino.trainingapp.ui.screens.composables
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,7 +21,8 @@ import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 fun TrainingMenuComposable(
     trainingName:String,
     trainingDescription:String,
-    borderColor:Color,
+    trainingDifficulty:String?,
+    borderColor: Color,
     borderSize:Dp,
     clickAction:() -> Unit
 ){
@@ -46,12 +46,22 @@ fun TrainingMenuComposable(
                 text = trainingName,
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(bottom = 6.dp)
+                modifier = Modifier.padding( 6.dp)
             )
+
+            trainingDifficulty?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding( 6.dp)
+                )
+            }
 
             Text(
                 text = trainingDescription,
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodyLarge ,
+                modifier = Modifier.padding( 6.dp)
             )
 
         }
@@ -66,9 +76,9 @@ private fun Preview() {
         TrainingMenuComposable(
             "Example",
             "Lorem Ipsum",
+            "Easy",
             MaterialTheme.colorScheme.surface,
-            0.dp,
-            {}
-        )
+            0.dp
+        ) {}
     }
 }

@@ -13,15 +13,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 import com.powerdino.trainingapp.R
 import com.powerdino.trainingapp.ui.AppScreens
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
+import com.powerdino.trainingapp.ui.screens.lists.ListOfExercises
+import com.powerdino.trainingapp.ui.screens.viewmodels.NavigationParamsViewModel
 
 
 @Composable
 fun TrainingScreen(
-    navController: NavController?,
+    navController: NavController,
+    navigationParamsViewModel: NavigationParamsViewModel,
     modifier: Modifier
 ){
     Column(
@@ -40,21 +44,33 @@ fun TrainingScreen(
             trainingDescription = "Lorem Ipsum",
             borderColor = MaterialTheme.colorScheme.primaryContainer,
             borderSize = 0.dp,
-        ){ navController?.navigate(AppScreens.ArgScreenOfTrainings("Name")) }
+            trainingDifficulty = null
+        ){
+            navigationParamsViewModel.setNavStateList(ListOfExercises.firstList)
+            navController.navigate(AppScreens.ArgScreenOfTrainings)
+        }
 
         TrainingMenuComposable(
             trainingName = "Example 2",
             trainingDescription = "Lorem Ipsum",
             borderColor = MaterialTheme.colorScheme.primaryContainer,
-            borderSize = 0.dp
-        ) { navController?.navigate(AppScreens.ArgScreenOfTrainings("Name")) }
+            borderSize = 0.dp,
+            trainingDifficulty = null
+        ) {
+            navigationParamsViewModel.setNavStateList(ListOfExercises.secondList)
+            navController.navigate(AppScreens.ArgScreenOfTrainings)
+        }
 
         TrainingMenuComposable(
             trainingName = "Example 3",
             trainingDescription = "Lorem Ipsum" ,
             borderColor = MaterialTheme.colorScheme.primaryContainer,
-            borderSize = 0.dp
-        ) { navController?.navigate(AppScreens.ArgScreenOfTrainings("Name")) }
+            borderSize = 0.dp,
+            trainingDifficulty = null
+        ) {
+            navigationParamsViewModel.setNavStateList(ListOfExercises.thirdList)
+            navController.navigate(AppScreens.ArgScreenOfTrainings)
+        }
 
     }
 }
@@ -84,8 +100,9 @@ private fun Preview() {
     TrainingAppTheme {
         Surface {
             TrainingScreen(
-                null,
-                modifier = Modifier
+                rememberNavController(),
+                modifier = Modifier,
+                navigationParamsViewModel = NavigationParamsViewModel()
             )
         }
     }

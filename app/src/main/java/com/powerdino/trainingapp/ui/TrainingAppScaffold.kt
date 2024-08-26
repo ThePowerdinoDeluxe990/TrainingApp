@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -32,9 +33,12 @@ import com.powerdino.trainingapp.ui.screens.ExercisesListScreen
 import com.powerdino.trainingapp.ui.screens.StarScreen
 import com.powerdino.trainingapp.ui.screens.TrainingScreen
 import com.powerdino.trainingapp.ui.screens.composables.IconMenuButton
+import com.powerdino.trainingapp.ui.screens.viewmodels.NavigationParamsViewModel
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 @Composable
-fun TrainingAppScaffold(){
+fun TrainingAppScaffold(
+    NavViewModel: NavigationParamsViewModel = viewModel()
+){
     val navController = rememberNavController()
 
     var bottomSelected by remember {
@@ -106,6 +110,7 @@ fun TrainingAppScaffold(){
                 composable<AppScreens.TrainingScreen>{
                     TrainingScreen(
                         navController,
+                        navigationParamsViewModel = NavViewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -117,12 +122,12 @@ fun TrainingAppScaffold(){
                 }
 
                 composable<AppScreens.ArgScreenOfTrainings>{
-                    val args = it.toRoute<AppScreens.ArgScreenOfTrainings>()
                     ExercisesListScreen(
-                        navController
+                        navController,
+                        navigationParamsViewModel = NavViewModel
                     )
                 }
-        }
+            }
     }
 }
 

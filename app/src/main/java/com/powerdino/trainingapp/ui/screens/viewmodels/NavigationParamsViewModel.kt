@@ -19,7 +19,5 @@ class NavigationParamsViewModel : ViewModel(){
       currentList = newList
     }
 
-    fun returnCurrentList(): List<ListOfExerciseData> {
-        return currentList
-    }
+
 }

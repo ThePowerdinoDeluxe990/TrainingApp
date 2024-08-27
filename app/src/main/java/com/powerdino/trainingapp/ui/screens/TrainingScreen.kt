@@ -47,7 +47,7 @@ fun TrainingScreen(
             trainingDifficulty = null
         ){
             navigationParamsViewModel.setNavStateList(ListOfExercises.firstList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings)
+            navController.navigate(AppScreens.ArgScreenOfTrainings("Example 1"))
         }
 
         TrainingMenuComposable(
@@ -58,7 +58,7 @@ fun TrainingScreen(
             trainingDifficulty = null
         ) {
             navigationParamsViewModel.setNavStateList(ListOfExercises.secondList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings)
+            navController.navigate(AppScreens.ArgScreenOfTrainings("Example 2"))
         }
 
         TrainingMenuComposable(
@@ -69,9 +69,8 @@ fun TrainingScreen(
             trainingDifficulty = null
         ) {
             navigationParamsViewModel.setNavStateList(ListOfExercises.thirdList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings)
+            navController.navigate(AppScreens.ArgScreenOfTrainings("Example 3"))
         }
-
     }
 }
 

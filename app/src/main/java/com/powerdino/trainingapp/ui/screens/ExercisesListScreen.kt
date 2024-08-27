@@ -31,7 +31,8 @@ import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 @Composable
 fun ExercisesListScreen(
     navController: NavHostController,
-    navigationParamsViewModel: NavigationParamsViewModel
+    navigationParamsViewModel: NavigationParamsViewModel,
+    titleArgument:String
 ) {
     Scaffold (
         topBar ={ TopAppBar(title = {
@@ -45,11 +46,10 @@ fun ExercisesListScreen(
             ) {
                 Icon(
                     Icons.AutoMirrored.Filled.ArrowBack,
-                    "ArrowBack"
+                    contentDescription = "ArrowBack"
                 )
             }
-                Text("WORK IN PROGRESS")
-
+                Text(text = titleArgument)
             }
         })}
     ){ innerPadding ->
@@ -67,10 +67,7 @@ fun ExercisesListScreen(
                 ) {
                     
                 }
-
-
             }
-            Text("ExercisesListScreen")
         }
     }
 }
@@ -102,7 +99,8 @@ private fun Preview() {
         Surface {
             ExercisesListScreen(
                 navController = rememberNavController(),
-                navigationParamsViewModel = NavigationParamsViewModel()
+                navigationParamsViewModel = NavigationParamsViewModel(),
+                titleArgument = "Example Title"
             )
         }
     }

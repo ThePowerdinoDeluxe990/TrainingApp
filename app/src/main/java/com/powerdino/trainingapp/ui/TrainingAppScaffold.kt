@@ -1,8 +1,6 @@
 package com.powerdino.trainingapp.ui
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +34,7 @@ import com.powerdino.trainingapp.ui.screens.TrainingScreen
 import com.powerdino.trainingapp.ui.screens.composables.IconMenuButton
 import com.powerdino.trainingapp.ui.screens.viewmodels.NavigationParamsViewModel
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
+
 @Composable
 fun TrainingAppScaffold(
     NavViewModel: NavigationParamsViewModel = viewModel()
@@ -57,7 +57,7 @@ fun TrainingAppScaffold(
                       if (bottomSelected){
                           IconMenuButton(
                               onClick = { navController.navigate(AppScreens.TrainingScreen) },
-                              description = R.string.home_button,
+                              description = R.string.selected_home_button,
                               icon = Icons.Filled.Home,
                               iconName = stringResource(id = R.string.button_home_text),
                               color = MaterialTheme.colorScheme.secondaryContainer,
@@ -90,7 +90,7 @@ fun TrainingAppScaffold(
 
                           IconMenuButton(
                               onClick = { navController.navigate(AppScreens.StarScreen) },
-                              description = R.string.my_training,
+                              description = R.string.selected_my_training,
                               icon = Icons.Filled.Email,
                               iconName = stringResource(id = R.string.button_training_text),
                               color = MaterialTheme.colorScheme.secondaryContainer,
@@ -117,14 +117,18 @@ fun TrainingAppScaffold(
 
                 composable<AppScreens.StarScreen>{
                     StarScreen(
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier
+                            .testTag("StarScreen")
+                            .padding(innerPadding)
                     )
                 }
 
                 composable<AppScreens.ArgScreenOfTrainings>{
+                    val args = it.toRoute<AppScreens.ArgScreenOfTrainings>()
                     ExercisesListScreen(
                         navController,
-                        navigationParamsViewModel = NavViewModel
+                        navigationParamsViewModel = NavViewModel,
+                        titleArgument = args.titleOfScreen
                     )
                 }
             }

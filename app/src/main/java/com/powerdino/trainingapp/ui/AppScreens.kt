@@ -12,5 +12,7 @@ object AppScreens {
     object StarScreen
 
     @Serializable
-    object ArgScreenOfTrainings
+    data class ArgScreenOfTrainings(
+        val titleOfScreen:String
+    )
 }

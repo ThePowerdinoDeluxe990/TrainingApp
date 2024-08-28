@@ -19,13 +19,13 @@ import com.powerdino.trainingapp.R
 import com.powerdino.trainingapp.ui.AppScreens
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
 import com.powerdino.trainingapp.ui.screens.lists.ListOfExercises
-import com.powerdino.trainingapp.ui.screens.viewmodels.NavigationParamsViewModel
+import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseViewModel
 
 
 @Composable
 fun TrainingScreen(
     navController: NavController,
-    navigationParamsViewModel: NavigationParamsViewModel,
+    exerciseViewModel: ExerciseViewModel,
     modifier: Modifier
 ){
     Column(
@@ -40,36 +40,36 @@ fun TrainingScreen(
         )
 
         TrainingMenuComposable(
-            trainingName = "Example 1",
-            trainingDescription = "Lorem Ipsum",
+            trainingName = "Arms",
+            trainingDescription = stringResource(id = R.string.arm_description_routine),
             borderColor = MaterialTheme.colorScheme.primaryContainer,
             borderSize = 0.dp,
             trainingDifficulty = null
         ){
-            navigationParamsViewModel.setNavStateList(ListOfExercises.firstList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings("Example 1"))
+            exerciseViewModel.setNavStateList(ListOfExercises.firstList)
+            navController.navigate(AppScreens.ArgScreenOfTrainings("Arms Training"))
         }
 
         TrainingMenuComposable(
-            trainingName = "Example 2",
-            trainingDescription = "Lorem Ipsum",
+            trainingName = "Legs",
+            trainingDescription = stringResource(id = R.string.legs_description_routine),
             borderColor = MaterialTheme.colorScheme.primaryContainer,
             borderSize = 0.dp,
             trainingDifficulty = null
         ) {
-            navigationParamsViewModel.setNavStateList(ListOfExercises.secondList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings("Example 2"))
+            exerciseViewModel.setNavStateList(ListOfExercises.secondList)
+            navController.navigate(AppScreens.ArgScreenOfTrainings("Legs Training"))
         }
 
         TrainingMenuComposable(
-            trainingName = "Example 3",
-            trainingDescription = "Lorem Ipsum" ,
+            trainingName = "Running",
+            trainingDescription = stringResource(id = R.string.running_description_routine) ,
             borderColor = MaterialTheme.colorScheme.primaryContainer,
             borderSize = 0.dp,
             trainingDifficulty = null
         ) {
-            navigationParamsViewModel.setNavStateList(ListOfExercises.thirdList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings("Example 3"))
+            exerciseViewModel.setNavStateList(ListOfExercises.thirdList)
+            navController.navigate(AppScreens.ArgScreenOfTrainings("Running Training"))
         }
     }
 }
@@ -101,7 +101,7 @@ private fun Preview() {
             TrainingScreen(
                 rememberNavController(),
                 modifier = Modifier,
-                navigationParamsViewModel = NavigationParamsViewModel()
+                exerciseViewModel = ExerciseViewModel()
             )
         }
     }

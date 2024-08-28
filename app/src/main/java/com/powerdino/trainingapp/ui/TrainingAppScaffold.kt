@@ -1,5 +1,8 @@
 package com.powerdino.trainingapp.ui
 
+import android.app.Activity
+import android.content.Context
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,10 +21,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,14 +39,18 @@ import com.powerdino.trainingapp.ui.screens.ExercisesListScreen
 import com.powerdino.trainingapp.ui.screens.StarScreen
 import com.powerdino.trainingapp.ui.screens.TrainingScreen
 import com.powerdino.trainingapp.ui.screens.composables.IconMenuButton
-import com.powerdino.trainingapp.ui.screens.viewmodels.NavigationParamsViewModel
+import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseViewModel
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
+
+
 
 @Composable
 fun TrainingAppScaffold(
-    NavViewModel: NavigationParamsViewModel = viewModel()
+    NavViewModel: ExerciseViewModel = viewModel()
 ){
     val navController = rememberNavController()
+    val context = LocalContext.current
+
 
     var bottomSelected by remember {
         mutableStateOf(true)
@@ -103,35 +114,47 @@ fun TrainingAppScaffold(
         }
     ){ innerPadding ->
 
-            NavHost(
-                navController = navController,
-                startDestination = AppScreens.TrainingScreen,
-            ){
-                composable<AppScreens.TrainingScreen>{
-                    TrainingScreen(
-                        navController,
-                        navigationParamsViewModel = NavViewModel,
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-
-                composable<AppScreens.StarScreen>{
-                    StarScreen(
-                        modifier = Modifier
-                            .testTag("StarScreen")
-                            .padding(innerPadding)
-                    )
-                }
-
-                composable<AppScreens.ArgScreenOfTrainings>{
-                    val args = it.toRoute<AppScreens.ArgScreenOfTrainings>()
-                    ExercisesListScreen(
-                        navController,
-                        navigationParamsViewModel = NavViewModel,
-                        titleArgument = args.titleOfScreen
-                    )
+        NavHost(
+            navController = navController,
+            startDestination = AppScreens.TrainingScreen,
+        ){
+            composable<AppScreens.TrainingScreen>{
+                TrainingScreen(
+                    navController,
+                    exerciseViewModel = NavViewModel,
+                    modifier = Modifier.padding(innerPadding)
+                )
+                BackHandler(true){
+                    val activity = (context as? Activity)
+                    activity?.finish()
                 }
             }
+
+            composable<AppScreens.StarScreen>{
+                StarScreen(
+                    modifier = Modifier
+                        .testTag("StarScreen")
+                        .padding(innerPadding)
+                )
+                BackHandler(true){
+                    navController.navigate(AppScreens.TrainingScreen)
+                    bottomSelected = true
+                }
+            }
+
+            composable<AppScreens.ArgScreenOfTrainings>{
+                val args = it.toRoute<AppScreens.ArgScreenOfTrainings>()
+                ExercisesListScreen(
+                    navController,
+                    exerciseViewModel = NavViewModel,
+                    titleArgument = args.titleOfScreen
+                )
+
+                BackHandler (true){
+                    navController.navigate(AppScreens.TrainingScreen)
+                }
+            }
+        }
     }
 }
 

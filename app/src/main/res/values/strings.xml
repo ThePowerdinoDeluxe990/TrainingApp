@@ -6,6 +6,13 @@
     <string name="selected_my_training">Selected My trainings</string>
 
     <string name="my_training_title">Trainings</string>
+
+    <!--
+    Description Exercises
+    -->
+    <string name="arm_description_routine">Exercise routine for arms</string>
+    <string name="legs_description_routine">Exercise routine for legs</string>
+    <string name="running_description_routine">Exercise routine for running</string>
     <!--
     Bottom Bar button text
     -->

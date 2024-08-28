@@ -23,7 +23,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.powerdino.trainingapp.ui.AppScreens
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
-import com.powerdino.trainingapp.ui.screens.viewmodels.NavigationParamsViewModel
+import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseViewModel
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 
 
@@ -31,7 +31,7 @@ import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 @Composable
 fun ExercisesListScreen(
     navController: NavHostController,
-    navigationParamsViewModel: NavigationParamsViewModel,
+    exerciseViewModel: ExerciseViewModel,
     titleArgument:String
 ) {
     Scaffold (
@@ -56,7 +56,7 @@ fun ExercisesListScreen(
         Column (
             modifier = Modifier.padding(innerPadding)
         ){
-            navigationParamsViewModel.currentList.forEach { item ->
+            exerciseViewModel.currentList.forEach { item ->
 
                 TrainingMenuComposable(
                     trainingName = item.nameOf,
@@ -99,7 +99,7 @@ private fun Preview() {
         Surface {
             ExercisesListScreen(
                 navController = rememberNavController(),
-                navigationParamsViewModel = NavigationParamsViewModel(),
+                exerciseViewModel = ExerciseViewModel(),
                 titleArgument = "Example Title"
             )
         }

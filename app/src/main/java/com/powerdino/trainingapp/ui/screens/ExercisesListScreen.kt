@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.powerdino.trainingapp.ui.AppScreens
+import com.powerdino.trainingapp.ui.NavAppScreens
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
 import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseViewModel
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
@@ -41,7 +41,7 @@ fun ExercisesListScreen(
             ){
                 IconButton(
                 onClick = {
-                    navController.navigate(AppScreens.TrainingScreen)
+                    navController.navigate(NavAppScreens.TrainingScreen.route)
                 }
             ) {
                 Icon(

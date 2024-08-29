@@ -22,9 +22,6 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
-
-
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {

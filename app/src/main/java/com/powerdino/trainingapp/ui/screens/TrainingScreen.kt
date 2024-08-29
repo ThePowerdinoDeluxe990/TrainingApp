@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 import com.powerdino.trainingapp.R
-import com.powerdino.trainingapp.ui.AppScreens
+import com.powerdino.trainingapp.ui.NavAppScreens
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
 import com.powerdino.trainingapp.ui.screens.lists.ListOfExercises
 import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseViewModel
@@ -47,7 +47,9 @@ fun TrainingScreen(
             trainingDifficulty = null
         ){
             exerciseViewModel.setNavStateList(ListOfExercises.firstList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings("Arms Training"))
+            navController.navigate(
+                NavAppScreens.ExercisesListScreen.route + "/Arms Training"
+            )
         }
 
         TrainingMenuComposable(
@@ -58,7 +60,9 @@ fun TrainingScreen(
             trainingDifficulty = null
         ) {
             exerciseViewModel.setNavStateList(ListOfExercises.secondList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings("Legs Training"))
+            navController.navigate(
+                NavAppScreens.ExercisesListScreen.route + "/Legs Training"
+            )
         }
 
         TrainingMenuComposable(
@@ -69,7 +73,9 @@ fun TrainingScreen(
             trainingDifficulty = null
         ) {
             exerciseViewModel.setNavStateList(ListOfExercises.thirdList)
-            navController.navigate(AppScreens.ArgScreenOfTrainings("Running Training"))
+            navController.navigate(
+                NavAppScreens.ExercisesListScreen.route + "/Running Training"
+            )
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.powerdino.trainingapp.ui
 
 import android.app.Activity
-import android.content.Context
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -21,19 +20,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
+import androidx.navigation.navArgument
 import com.powerdino.trainingapp.R
 import com.powerdino.trainingapp.ui.screens.ExercisesListScreen
 import com.powerdino.trainingapp.ui.screens.StarScreen
@@ -67,7 +64,7 @@ fun TrainingAppScaffold(
                       //Logic of bottom bar
                       if (bottomSelected){
                           IconMenuButton(
-                              onClick = { navController.navigate(AppScreens.TrainingScreen) },
+                              onClick = { navController.navigate(NavAppScreens.TrainingScreen.route) },
                               description = R.string.selected_home_button,
                               icon = Icons.Filled.Home,
                               iconName = stringResource(id = R.string.button_home_text),
@@ -77,7 +74,7 @@ fun TrainingAppScaffold(
 
                           IconMenuButton(
                               onClick = {
-                                  navController.navigate(AppScreens.StarScreen)
+                                  navController.navigate(NavAppScreens.StarScreen.route)
                                   bottomSelected = false
                                 },
                               description = R.string.my_training,
@@ -89,7 +86,7 @@ fun TrainingAppScaffold(
                       }else{
                           IconMenuButton(
                               onClick = {
-                                  navController.navigate(AppScreens.TrainingScreen)
+                                  navController.navigate(NavAppScreens.TrainingScreen.route)
                                   bottomSelected = true
                                 },
                               description = R.string.home_button,
@@ -100,7 +97,7 @@ fun TrainingAppScaffold(
                           )
 
                           IconMenuButton(
-                              onClick = { navController.navigate(AppScreens.StarScreen) },
+                              onClick = { navController.navigate(NavAppScreens.StarScreen.route) },
                               description = R.string.selected_my_training,
                               icon = Icons.Filled.Email,
                               iconName = stringResource(id = R.string.button_training_text),
@@ -116,9 +113,9 @@ fun TrainingAppScaffold(
 
         NavHost(
             navController = navController,
-            startDestination = AppScreens.TrainingScreen,
+            startDestination = NavAppScreens.TrainingScreen.route,
         ){
-            composable<AppScreens.TrainingScreen>{
+            composable(route = NavAppScreens.TrainingScreen.route){
                 TrainingScreen(
                     navController,
                     exerciseViewModel = NavViewModel,
@@ -130,28 +127,33 @@ fun TrainingAppScaffold(
                 }
             }
 
-            composable<AppScreens.StarScreen>{
+            composable(route = NavAppScreens.StarScreen.route){
                 StarScreen(
                     modifier = Modifier
                         .testTag("StarScreen")
                         .padding(innerPadding)
                 )
                 BackHandler(true){
-                    navController.navigate(AppScreens.TrainingScreen)
+                    navController.navigate(NavAppScreens.TrainingScreen.route)
                     bottomSelected = true
                 }
             }
 
-            composable<AppScreens.ArgScreenOfTrainings>{
-                val args = it.toRoute<AppScreens.ArgScreenOfTrainings>()
+            composable(route = NavAppScreens.ExercisesListScreen.route+ "/{Title}",
+                arguments = listOf(
+                    navArgument(name="Title"){
+                        type = NavType.StringType
+                    }
+                )
+            ){
                 ExercisesListScreen(
                     navController,
                     exerciseViewModel = NavViewModel,
-                    titleArgument = args.titleOfScreen
+                    titleArgument = it.arguments?.getString("Title")!!
                 )
 
                 BackHandler (true){
-                    navController.navigate(AppScreens.TrainingScreen)
+                    navController.navigate(NavAppScreens.TrainingScreen.route)
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.powerdino.trainingapp.ui
 
 import android.app.Activity
+import androidx.compose.material3.Icon
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -9,15 +10,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedButtonDefaults.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -35,12 +46,14 @@ import com.powerdino.trainingapp.R
 import com.powerdino.trainingapp.ui.screens.ExercisesListScreen
 import com.powerdino.trainingapp.ui.screens.StarScreen
 import com.powerdino.trainingapp.ui.screens.TrainingScreen
+import com.powerdino.trainingapp.ui.screens.composables.BottomNavigationItem
 import com.powerdino.trainingapp.ui.screens.composables.IconMenuButton
 import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseViewModel
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TrainingAppScaffold(
     NavViewModel: ExerciseViewModel = viewModel()
@@ -49,65 +62,53 @@ fun TrainingAppScaffold(
     val context = LocalContext.current
 
 
-    var bottomSelected by remember {
-        mutableStateOf(true)
+    var bottomSelected by rememberSaveable {
+        mutableStateOf(0)
     }
+    val bottomAppBarItems = listOf(
+        BottomNavigationItem(
+            title = stringResource(id = R.string.button_home_text),
+            selectedIcon = Icons.Filled.Home,
+            unselectedIcon = Icons.Outlined.Home,
+            route = NavAppScreens.TrainingScreen.route,
+            selected = true
+        ),
+        BottomNavigationItem(
+            title = stringResource(id = R.string.my_training),
+            selectedIcon = Icons.Filled.Star,
+            unselectedIcon = Icons.Outlined.Star,
+            route = NavAppScreens.StarScreen.route,
+            selected = false
+        )
+    )
 
     Scaffold (
         bottomBar = {
-          BottomAppBar(
-              actions = {
-                  Row(
-                      horizontalArrangement = Arrangement.SpaceEvenly,
-                      modifier = Modifier.fillMaxWidth()
-                  ) {
-                      //Logic of bottom bar
-                      if (bottomSelected){
-                          IconMenuButton(
-                              onClick = { navController.navigate(NavAppScreens.TrainingScreen.route) },
-                              description = R.string.selected_home_button,
-                              icon = Icons.Filled.Home,
-                              iconName = stringResource(id = R.string.button_home_text),
-                              color = MaterialTheme.colorScheme.secondaryContainer,
-                              fontWeight = FontWeight.Bold
-                          )
+              NavigationBar {
+                  bottomAppBarItems.forEachIndexed{ index, item ->
+                      NavigationBarItem(
+                          selected = bottomSelected == index,
+                          onClick = {
+                              bottomSelected = index
+                              navController.navigate(item.route)
+                          },
+                          label = {
+                              Text(item.title)
+                          },
+                          alwaysShowLabel = true,
+                          icon = {
+                              Icon(
+                                  imageVector = if (index ==  bottomSelected) {
+                                      item.selectedIcon
+                                  } else item.unselectedIcon,
+                                          contentDescription = item.title
 
-                          IconMenuButton(
-                              onClick = {
-                                  navController.navigate(NavAppScreens.StarScreen.route)
-                                  bottomSelected = false
-                                },
-                              description = R.string.my_training,
-                              icon = Icons.Outlined.Email,
-                              iconName = stringResource(id = R.string.button_training_text),
-                              color = MaterialTheme.colorScheme.surface,
-                              fontWeight = FontWeight.Normal
-                          )
-                      }else{
-                          IconMenuButton(
-                              onClick = {
-                                  navController.navigate(NavAppScreens.TrainingScreen.route)
-                                  bottomSelected = true
-                                },
-                              description = R.string.home_button,
-                              icon = Icons.Outlined.Home,
-                              iconName = stringResource(id = R.string.button_home_text),
-                              color = MaterialTheme.colorScheme.surface,
-                              fontWeight = FontWeight.Normal
-                          )
-
-                          IconMenuButton(
-                              onClick = { navController.navigate(NavAppScreens.StarScreen.route) },
-                              description = R.string.selected_my_training,
-                              icon = Icons.Filled.Email,
-                              iconName = stringResource(id = R.string.button_training_text),
-                              color = MaterialTheme.colorScheme.secondaryContainer,
-                              fontWeight = FontWeight.Bold
-                          )
-                      }
+                              )
+                          }
+                      )
                   }
+
               }
-          )
         }
     ){ innerPadding ->
 
@@ -135,7 +136,7 @@ fun TrainingAppScaffold(
                 )
                 BackHandler(true){
                     navController.navigate(NavAppScreens.TrainingScreen.route)
-                    bottomSelected = true
+                    bottomSelected = 0
                 }
             }
 

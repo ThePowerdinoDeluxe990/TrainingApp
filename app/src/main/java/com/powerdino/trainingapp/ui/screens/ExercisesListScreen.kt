@@ -1,12 +1,10 @@
 package com.powerdino.trainingapp.ui.screens
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -69,32 +67,32 @@ fun ExercisesListScreen(
         LazyColumn (
             modifier = Modifier.padding(innerPadding)
         ){
-            itemsIndexed(exerciseViewModel.currentList){index,  item ->
+            items(exerciseViewModel.currentList){ item ->
                 TrainingMenuComposable(
                     trainingName = item.nameOf,
                     trainingDescription = item.descriptionOfExercise,
                     trainingDifficulty = item.difficultyLevel,
                     borderColor = Color(item.borderColor),
-                    borderSize = 2.dp
-                ) {
-                    coroutineScope.launch{
-                        dataBaseViewModel?.insertItem(
-                            item = ExerciseEntity(
-                                difficultyLevel = item.difficultyLevel,
-                                nameOf = item.nameOf,
-                                descriptionOfExercise = item.descriptionOfExercise,
-                                pictureExercise = item.pictureExercise,
-                                borderColor = item.borderColor,
-                                id = index
+                    borderSize = 2.dp,
+                    clickAction = {
+
+                    },
+                    starAction = {
+                        coroutineScope.launch{
+                            dataBaseViewModel?.insertItem(
+                                item = ExerciseEntity(
+                                    difficultyLevel = item.difficultyLevel,
+                                    nameOf = item.nameOf,
+                                    descriptionOfExercise = item.descriptionOfExercise,
+                                    pictureExercise = item.pictureExercise,
+                                    borderColor = item.borderColor,
+                                    id = item.id
+                                )
                             )
-                        )
-                    }
-                }
-
-            }
-            exerciseViewModel.currentList.forEachIndexed {index, item ->
-
-
+                        }
+                    },
+                    enableOrDisableStar = true
+                )
             }
         }
     }

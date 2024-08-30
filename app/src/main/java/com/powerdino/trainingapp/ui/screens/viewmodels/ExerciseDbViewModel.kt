@@ -8,9 +8,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.powerdino.trainingapp.TrainingApplication
 import com.powerdino.trainingapp.data.ExerciseDao
 import com.powerdino.trainingapp.data.ExerciseEntity
-import com.powerdino.trainingapp.ui.screens.ListOfExerciseData
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 
 class ExerciseDbViewModel(
     private val exerciseDao: ExerciseDao

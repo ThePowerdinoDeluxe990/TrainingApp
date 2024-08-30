@@ -44,39 +44,48 @@ fun TrainingScreen(
             trainingDescription = stringResource(id = R.string.arm_description_routine),
             borderColor = MaterialTheme.colorScheme.primaryContainer,
             borderSize = 0.dp,
-            trainingDifficulty = null
-        ){
-            exerciseViewModel.setNavStateList(ListOfExercises.firstList)
-            navController.navigate(
-                NavAppScreens.ExercisesListScreen.route + "/Arms Training"
-            )
-        }
+            trainingDifficulty = null,
+            clickAction = {
+                exerciseViewModel.setNavStateList(ListOfExercises.firstList)
+                navController.navigate(
+                    NavAppScreens.ExercisesListScreen.route + "/Arms Training"
+                )
+            },
+            starAction = {},
+            enableOrDisableStar = false
+        )
 
         TrainingMenuComposable(
             trainingName = "Legs",
             trainingDescription = stringResource(id = R.string.legs_description_routine),
             borderColor = MaterialTheme.colorScheme.primaryContainer,
             borderSize = 0.dp,
-            trainingDifficulty = null
-        ) {
-            exerciseViewModel.setNavStateList(ListOfExercises.secondList)
-            navController.navigate(
-                NavAppScreens.ExercisesListScreen.route + "/Legs Training"
-            )
-        }
+            trainingDifficulty = null,
+            starAction = {},
+            clickAction = {
+                exerciseViewModel.setNavStateList(ListOfExercises.secondList)
+                navController.navigate(
+                    NavAppScreens.ExercisesListScreen.route + "/Legs Training"
+                )
+            },
+            enableOrDisableStar = false
+        )
 
         TrainingMenuComposable(
             trainingName = "Running",
             trainingDescription = stringResource(id = R.string.running_description_routine) ,
             borderColor = MaterialTheme.colorScheme.primaryContainer,
             borderSize = 0.dp,
-            trainingDifficulty = null
-        ) {
-            exerciseViewModel.setNavStateList(ListOfExercises.thirdList)
-            navController.navigate(
-                NavAppScreens.ExercisesListScreen.route + "/Running Training"
-            )
-        }
+            trainingDifficulty = null,
+            starAction = {},
+            clickAction = {
+                exerciseViewModel.setNavStateList(ListOfExercises.thirdList)
+                navController.navigate(
+                    NavAppScreens.ExercisesListScreen.route + "/Running Training"
+                )
+            },
+            enableOrDisableStar = false
+        )
     }
 }
 

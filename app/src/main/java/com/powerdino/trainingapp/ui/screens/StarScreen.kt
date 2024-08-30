@@ -17,6 +17,7 @@ fun StarScreen(
     dataBaseViewModel: ExerciseDbViewModel
 ){
     val showAllItems by dataBaseViewModel.getAll().collectAsState(emptyList())
+
     LazyColumn (
         modifier = modifier,
     ){
@@ -26,10 +27,11 @@ fun StarScreen(
                 trainingDescription = item.descriptionOfExercise,
                 trainingDifficulty = item.difficultyLevel,
                 borderColor = Color(item.borderColor),
-                borderSize = 2.dp
-            ){
-
-            }
+                borderSize = 2.dp,
+                clickAction = {},
+                starAction = {},
+                enableOrDisableStar = false
+            )
         }
 
     }

@@ -1,11 +1,11 @@
 package com.powerdino.trainingapp.ui.screens.lists
 
 import android.graphics.Color
-import com.powerdino.trainingapp.ui.screens.ListOfExerciseData
 
 object ListOfExercises {
     val firstList = listOf(
         ListOfExerciseData(
+            id = 1,
             difficultyLevel = "Easy",
             nameOf = "Beginner arms routine",
             pictureExercise = 12,
@@ -13,6 +13,7 @@ object ListOfExercises {
             descriptionOfExercise = "Easy arms routine"
         ),
         ListOfExerciseData(
+            id = 2,
             difficultyLevel = "Medium",
             nameOf = "Advanced arms routine",
             borderColor = Color.YELLOW,
@@ -20,6 +21,7 @@ object ListOfExercises {
             descriptionOfExercise = "Advanced arms routine"
         ),
         ListOfExerciseData(
+            id = 3,
             difficultyLevel = "Hard",
             nameOf = "Expert arms routine",
             borderColor = Color.RED,
@@ -30,6 +32,7 @@ object ListOfExercises {
 
     val secondList = listOf(
         ListOfExerciseData(
+            id = 4,
             difficultyLevel = "Easy",
             nameOf = "Beginner legs routine",
             borderColor = Color.GREEN,
@@ -37,6 +40,7 @@ object ListOfExercises {
             descriptionOfExercise = "Easy legs routine"
         ),
         ListOfExerciseData(
+            id = 5,
             difficultyLevel = "Medium",
             nameOf = "Advanced legs routine",
             borderColor = Color.YELLOW,
@@ -44,6 +48,7 @@ object ListOfExercises {
             descriptionOfExercise = "Medium legs routine"
         ),
         ListOfExerciseData(
+            id = 6,
             difficultyLevel = "Hard",
             nameOf = "Expert legs routine",
             borderColor = Color.RED,
@@ -54,6 +59,7 @@ object ListOfExercises {
 
     val thirdList = listOf(
         ListOfExerciseData(
+            id = 7,
             difficultyLevel = "Easy",
             nameOf = "Beginner running routine",
             borderColor = Color.GREEN,
@@ -61,6 +67,7 @@ object ListOfExercises {
             descriptionOfExercise = "Easy running routine"
         ),
         ListOfExerciseData(
+            id = 8,
             difficultyLevel = "Medium",
             nameOf = "Advanced running routine",
             pictureExercise = 12,
@@ -68,6 +75,7 @@ object ListOfExercises {
             descriptionOfExercise = "Medium running routine"
         ),
         ListOfExerciseData(
+            id = 9,
             difficultyLevel = "Hard",
             nameOf = "Expert running routine",
             pictureExercise = 12,

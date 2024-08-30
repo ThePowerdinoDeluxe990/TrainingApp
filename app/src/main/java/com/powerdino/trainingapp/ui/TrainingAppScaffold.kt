@@ -3,38 +3,25 @@ package com.powerdino.trainingapp.ui
 import android.app.Activity
 import androidx.compose.material3.Icon
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Star
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -47,24 +34,24 @@ import com.powerdino.trainingapp.ui.screens.ExercisesListScreen
 import com.powerdino.trainingapp.ui.screens.StarScreen
 import com.powerdino.trainingapp.ui.screens.TrainingScreen
 import com.powerdino.trainingapp.ui.screens.composables.BottomNavigationItem
-import com.powerdino.trainingapp.ui.screens.composables.IconMenuButton
+import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseDbViewModel
 import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseViewModel
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TrainingAppScaffold(
-    NavViewModel: ExerciseViewModel = viewModel()
+    NavViewModel: ExerciseViewModel = viewModel(),
+    DataBaseViewModel:ExerciseDbViewModel = viewModel(factory = ExerciseDbViewModel.factory)
 ){
     val navController = rememberNavController()
     val context = LocalContext.current
 
-
     var bottomSelected by rememberSaveable {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
+
     val bottomAppBarItems = listOf(
         BottomNavigationItem(
             title = stringResource(id = R.string.button_home_text),
@@ -132,7 +119,8 @@ fun TrainingAppScaffold(
                 StarScreen(
                     modifier = Modifier
                         .testTag("StarScreen")
-                        .padding(innerPadding)
+                        .padding(innerPadding),
+                    dataBaseViewModel = DataBaseViewModel
                 )
                 BackHandler(true){
                     navController.navigate(NavAppScreens.TrainingScreen.route)
@@ -150,7 +138,8 @@ fun TrainingAppScaffold(
                 ExercisesListScreen(
                     navController,
                     exerciseViewModel = NavViewModel,
-                    titleArgument = it.arguments?.getString("Title")!!
+                    titleArgument = it.arguments?.getString("Title")!!,
+                    dataBaseViewModel = DataBaseViewModel
                 )
 
                 BackHandler (true){

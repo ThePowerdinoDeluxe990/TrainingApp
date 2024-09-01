@@ -39,7 +39,7 @@ import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseViewModel
 import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 
 
-//TODO Test DAO
+
 @Composable
 fun TrainingAppScaffold(
     NavViewModel: ExerciseViewModel = viewModel(),

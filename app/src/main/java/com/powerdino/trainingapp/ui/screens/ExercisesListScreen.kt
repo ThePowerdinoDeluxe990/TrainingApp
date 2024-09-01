@@ -91,7 +91,9 @@ fun ExercisesListScreen(
                             )
                         }
                     },
-                    enableOrDisableStar = true
+                    enableOrDisableStar = true,
+                    enableOrDisableDelete = false,
+                    deleteAction = {}
                 )
             }
         }

@@ -52,7 +52,9 @@ fun TrainingScreen(
                 )
             },
             starAction = {},
-            enableOrDisableStar = false
+            enableOrDisableStar = false,
+            enableOrDisableDelete = false,
+            deleteAction = {}
         )
 
         TrainingMenuComposable(
@@ -68,7 +70,9 @@ fun TrainingScreen(
                     NavAppScreens.ExercisesListScreen.route + "/Legs Training"
                 )
             },
-            enableOrDisableStar = false
+            enableOrDisableStar = false,
+            enableOrDisableDelete = false,
+            deleteAction = {}
         )
 
         TrainingMenuComposable(
@@ -84,7 +88,9 @@ fun TrainingScreen(
                     NavAppScreens.ExercisesListScreen.route + "/Running Training"
                 )
             },
-            enableOrDisableStar = false
+            enableOrDisableStar = false,
+            enableOrDisableDelete = false,
+            deleteAction = {}
         )
     }
 }

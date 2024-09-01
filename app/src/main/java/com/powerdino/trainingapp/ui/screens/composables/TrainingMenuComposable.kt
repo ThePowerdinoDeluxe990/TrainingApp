@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -36,7 +38,9 @@ fun TrainingMenuComposable(
     borderSize:Dp,
     clickAction:() -> Unit,
     starAction:() -> Unit,
-    enableOrDisableStar:Boolean
+    deleteAction:() -> Unit,
+    enableOrDisableStar:Boolean,
+    enableOrDisableDelete:Boolean
 ){
     Card (
         elevation = CardDefaults.cardElevation(
@@ -98,6 +102,29 @@ fun TrainingMenuComposable(
                 }
             }
 
+            if(enableOrDisableDelete){
+                Button(
+                    onClick = deleteAction,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Row (
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ){
+                        Icon(
+                            imageVector = Icons.Outlined.Delete,
+                            contentDescription = stringResource(id = R.string.add_to_star),
+                        )
+
+                        Spacer( modifier = Modifier.padding(2.dp))
+
+                        Text("Delete")
+                    }
+                }
+            }
+
         }
     }
 }
@@ -116,7 +143,9 @@ private fun Preview() {
                 0.dp,
                 {},
                 {},
-                true
+                {},
+                true,
+                false
             )
             TrainingMenuComposable(
                 "Example",
@@ -126,7 +155,21 @@ private fun Preview() {
                 0.dp,
                 {},
                 {},
+                {},
+                false,
                 false
+            )
+            TrainingMenuComposable(
+                    "Example",
+            "Lorem Ipsum",
+            "Easy",
+            MaterialTheme.colorScheme.surface,
+            0.dp,
+            {},
+            {},
+                {},
+            false,
+            true
             )
         }
 

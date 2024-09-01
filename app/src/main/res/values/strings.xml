@@ -19,4 +19,12 @@
     -->
     <string name="button_home_text">Home</string>
     <string name="button_training_text">My trainings</string>
+
+    <string name="warning_icon_description">Warning Icon</string>
+    <string name="is_empty_text">
+        This page is empty!
+    </string>
+    <string name="is_empty_description">
+        Click on the star button to add a routine!
+    </string>
 </resources>

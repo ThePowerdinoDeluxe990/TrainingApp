@@ -1,7 +1,5 @@
 package com.powerdino.trainingapp.data
 
-import androidx.annotation.NonNull
-import androidx.compose.ui.graphics.Color
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -24,5 +22,8 @@ data class ExerciseEntity (
     val pictureExercise:Int,
 
     @ColumnInfo(name = "description_of_exercise")
-    val descriptionOfExercise:String
+    val descriptionOfExercise:String,
+
+    @ColumnInfo(name="repets")
+    val repets:String
 )

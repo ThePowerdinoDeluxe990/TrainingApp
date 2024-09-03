@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.powerdino.trainingapp.ui.NavAppScreens
 import com.powerdino.trainingapp.ui.screens.composables.DBEmptyComposable
 import com.powerdino.trainingapp.ui.screens.composables.TrainingMenuComposable
 import com.powerdino.trainingapp.ui.screens.viewmodels.ExerciseDbViewModel
@@ -22,7 +24,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun StarScreen(
     modifier: Modifier,
-    dataBaseViewModel: ExerciseDbViewModel
+    dataBaseViewModel: ExerciseDbViewModel,
+    navController: NavController
 ){
     val showAllItems by dataBaseViewModel.getAll().collectAsState(emptyList())
     val coroutineScope  = rememberCoroutineScope()
@@ -39,7 +42,6 @@ fun StarScreen(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
-
             DBEmptyComposable()
         }
     }else{
@@ -54,7 +56,6 @@ fun StarScreen(
                 color = MaterialTheme.colorScheme.primary
             )
             LazyColumn{
-
                 items(showAllItems) { item ->
                     TrainingMenuComposable(
                         trainingName = item.nameOf,
@@ -62,7 +63,11 @@ fun StarScreen(
                         trainingDifficulty = item.difficultyLevel,
                         borderColor = Color(item.borderColor),
                         borderSize = 2.dp,
-                        clickAction = {},
+                        clickAction = {
+                           navController.navigate(
+                               route = NavAppScreens.ExerciseScreen.route+"/${item.nameOf}/${item.difficultyLevel}/${item.pictureExercise}/${item.repets}"
+                           )
+                        },
                         starAction = {},
                         enableOrDisableStar = false,
                         enableOrDisableDelete = true,

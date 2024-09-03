@@ -9,5 +9,6 @@ data class ListOfExerciseData(
     val nameOf:String,
     val borderColor:Int,
     val pictureExercise:Int,
-    val descriptionOfExercise:String
+    val descriptionOfExercise:String,
+    val repes:String
 )

@@ -75,7 +75,9 @@ fun ExercisesListScreen(
                     borderColor = Color(item.borderColor),
                     borderSize = 2.dp,
                     clickAction = {
-
+                        navController.navigate(
+                            route = NavAppScreens.ExerciseScreen.route+"/${item.nameOf}/${item.difficultyLevel}/${item.pictureExercise}/${item.repes}"
+                        )
                     },
                     starAction = {
                         coroutineScope.launch{
@@ -86,7 +88,8 @@ fun ExercisesListScreen(
                                     descriptionOfExercise = item.descriptionOfExercise,
                                     pictureExercise = item.pictureExercise,
                                     borderColor = item.borderColor,
-                                    id = item.id
+                                    id = item.id,
+                                    repets = item.repes
                                 )
                             )
                         }

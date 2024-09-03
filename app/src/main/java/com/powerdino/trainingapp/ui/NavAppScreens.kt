@@ -4,4 +4,5 @@ sealed class NavAppScreens(val route:String) {
     object TrainingScreen: NavAppScreens(route = "TrainingScreen")
     object StarScreen: NavAppScreens(route = "StarScreen")
     object ExercisesListScreen: NavAppScreens(route = "ExercisesListScreen")
+    object ExerciseScreen:NavAppScreens(route = "exerciseScreen")
 }

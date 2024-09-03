@@ -1,6 +1,7 @@
 package com.powerdino.trainingapp.ui.screens.lists
 
 import android.graphics.Color
+import com.powerdino.trainingapp.R
 
 object ListOfExercises {
     val firstList = listOf(
@@ -8,25 +9,28 @@ object ListOfExercises {
             id = 1,
             difficultyLevel = "Easy",
             nameOf = "Beginner arms routine",
-            pictureExercise = 12,
+            pictureExercise = R.drawable.pushups,
             borderColor = Color.GREEN,
-            descriptionOfExercise = "Easy arms routine"
+            descriptionOfExercise = "Easy arms routine",
+            repes = "10"
         ),
         ListOfExerciseData(
             id = 2,
             difficultyLevel = "Medium",
             nameOf = "Advanced arms routine",
             borderColor = Color.YELLOW,
-            pictureExercise = 12,
-            descriptionOfExercise = "Advanced arms routine"
+            pictureExercise = R.drawable.pushups,
+            descriptionOfExercise = "Advanced arms routine",
+            repes = "20"
         ),
         ListOfExerciseData(
             id = 3,
             difficultyLevel = "Hard",
             nameOf = "Expert arms routine",
             borderColor = Color.RED,
-            pictureExercise = 12,
-            descriptionOfExercise = "Hard arms routine"
+            pictureExercise = R.drawable.pushups,
+            descriptionOfExercise = "Hard arms routine",
+            repes = "30"
         )
     )
 
@@ -36,24 +40,27 @@ object ListOfExercises {
             difficultyLevel = "Easy",
             nameOf = "Beginner legs routine",
             borderColor = Color.GREEN,
-            pictureExercise = 12,
-            descriptionOfExercise = "Easy legs routine"
+            pictureExercise = R.drawable.squats,
+            descriptionOfExercise = "Easy legs routine",
+            repes = "10"
         ),
         ListOfExerciseData(
             id = 5,
             difficultyLevel = "Medium",
             nameOf = "Advanced legs routine",
             borderColor = Color.YELLOW,
-            pictureExercise = 12,
-            descriptionOfExercise = "Medium legs routine"
+            pictureExercise = R.drawable.squats,
+            descriptionOfExercise = "Medium legs routine",
+            repes = "20"
         ),
         ListOfExerciseData(
             id = 6,
             difficultyLevel = "Hard",
             nameOf = "Expert legs routine",
             borderColor = Color.RED,
-            pictureExercise = 12,
-            descriptionOfExercise = "Hard legs routine"
+            pictureExercise = R.drawable.squats,
+            descriptionOfExercise = "Hard legs routine",
+            repes = "30"
         )
     )
 
@@ -63,24 +70,27 @@ object ListOfExercises {
             difficultyLevel = "Easy",
             nameOf = "Beginner running routine",
             borderColor = Color.GREEN,
-            pictureExercise = 12,
-            descriptionOfExercise = "Easy running routine"
+            pictureExercise = R.drawable.running,
+            descriptionOfExercise = "Easy running routine",
+            repes = "10:00"
         ),
         ListOfExerciseData(
             id = 8,
             difficultyLevel = "Medium",
             nameOf = "Advanced running routine",
-            pictureExercise = 12,
+            pictureExercise = R.drawable.running,
             borderColor = Color.YELLOW,
-            descriptionOfExercise = "Medium running routine"
+            descriptionOfExercise = "Medium running routine",
+            repes = "20:00"
         ),
         ListOfExerciseData(
             id = 9,
             difficultyLevel = "Hard",
             nameOf = "Expert running routine",
-            pictureExercise = 12,
+            pictureExercise = R.drawable.running,
             borderColor = Color.RED,
-            descriptionOfExercise = "Hard running routine"
+            descriptionOfExercise = "Hard running routine",
+            repes = "30:00"
         )
     )
 }

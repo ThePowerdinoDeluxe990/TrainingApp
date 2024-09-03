@@ -31,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.powerdino.trainingapp.R
 import com.powerdino.trainingapp.ui.screens.ExercisesListScreen
+import com.powerdino.trainingapp.ui.screens.ExercisesScreens
 import com.powerdino.trainingapp.ui.screens.StarScreen
 import com.powerdino.trainingapp.ui.screens.TrainingScreen
 import com.powerdino.trainingapp.ui.screens.composables.BottomNavigationItem
@@ -89,7 +90,6 @@ fun TrainingAppScaffold(
                                       item.selectedIcon
                                   } else item.unselectedIcon,
                                           contentDescription = item.title
-
                               )
                           }
                       )
@@ -98,7 +98,6 @@ fun TrainingAppScaffold(
               }
         }
     ){ innerPadding ->
-
         NavHost(
             navController = navController,
             startDestination = NavAppScreens.TrainingScreen.route,
@@ -120,7 +119,8 @@ fun TrainingAppScaffold(
                     modifier = Modifier
                         .testTag("StarScreen")
                         .padding(innerPadding),
-                    dataBaseViewModel = DataBaseViewModel
+                    dataBaseViewModel = DataBaseViewModel,
+                    navController = navController
                 )
                 BackHandler(true){
                     navController.navigate(NavAppScreens.TrainingScreen.route)
@@ -144,6 +144,37 @@ fun TrainingAppScaffold(
 
                 BackHandler (true){
                     navController.navigate(NavAppScreens.TrainingScreen.route)
+                }
+            }
+
+            composable( route = NavAppScreens.ExerciseScreen.route + "/{Name}/{Difficulty}/{Image}/{Repes}",
+                arguments = listOf(
+                    navArgument(name="Name"){
+                        type = NavType.StringType
+                    },
+                    navArgument(name="Difficulty"){
+                        type = NavType.StringType
+                    },
+                    navArgument(name="Image"){
+                        type = NavType.IntType
+                    },
+                    navArgument(name="Repes"){
+                        type = NavType.StringType
+                    }
+                )
+                ){
+                ExercisesScreens(
+                    nameArgument = it.arguments?.getString("Name")!!,
+                    imageArgument = it.arguments?.getInt("Image")!!,
+                    repes = it.arguments?.getString("Repes")!!,
+                    iconButtonClick = {
+                        navController.navigate(NavAppScreens.TrainingScreen.route)
+                        bottomSelected = 0
+                    }
+                )
+                BackHandler(true){
+                    navController.navigate(NavAppScreens.TrainingScreen.route)
+                    bottomSelected = 0
                 }
             }
         }

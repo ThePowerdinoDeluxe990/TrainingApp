@@ -1,6 +1,7 @@
 package com.powerdino.trainingapp.ui
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.material3.Icon
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.padding
@@ -169,6 +170,11 @@ fun TrainingAppScaffold(
                     imageArgument = it.arguments?.getInt("Image")!!,
                     repes = it.arguments?.getString("Repes")!!,
                     iconButtonClick = {
+                        Toast.makeText(
+                            context,
+                            "Done!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         navController.navigate(NavAppScreens.TrainingScreen.route)
                         bottomSelected = 0
                     }

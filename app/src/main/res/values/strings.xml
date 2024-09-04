@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TrainingApp</string>
+    <string name="app_name">Training App</string>
     <string name="home_button">Home Button</string>
     <string name="selected_home_button">Selected Home Button</string>
     <string name="my_training">My trainings</string>

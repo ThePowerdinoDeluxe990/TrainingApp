@@ -53,7 +53,6 @@ android {
 }
 
 dependencies {
-
     //Room
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)

@@ -43,8 +43,8 @@ import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 
 @Composable
 fun TrainingAppScaffold(
-    NavViewModel: ExerciseViewModel = viewModel(),
-    DataBaseViewModel:ExerciseDbViewModel = viewModel(factory = ExerciseDbViewModel.factory)
+    navViewModel: ExerciseViewModel = viewModel(),
+    dataBaseViewModel:ExerciseDbViewModel = viewModel(factory = ExerciseDbViewModel.factory)
 ){
     val navController = rememberNavController()
     val context = LocalContext.current
@@ -105,7 +105,7 @@ fun TrainingAppScaffold(
             composable(route = NavAppScreens.TrainingScreen.route){
                 TrainingScreen(
                     navController,
-                    exerciseViewModel = NavViewModel,
+                    exerciseViewModel = navViewModel,
                     modifier = Modifier.padding(innerPadding)
                 )
                 BackHandler(true){
@@ -119,7 +119,7 @@ fun TrainingAppScaffold(
                     modifier = Modifier
                         .testTag("StarScreen")
                         .padding(innerPadding),
-                    dataBaseViewModel = DataBaseViewModel,
+                    dataBaseViewModel = dataBaseViewModel,
                     navController = navController
                 )
                 BackHandler(true){
@@ -137,9 +137,10 @@ fun TrainingAppScaffold(
             ){
                 ExercisesListScreen(
                     navController,
-                    exerciseViewModel = NavViewModel,
+                    exerciseViewModel = navViewModel,
                     titleArgument = it.arguments?.getString("Title")!!,
-                    dataBaseViewModel = DataBaseViewModel
+                    dataBaseViewModel = dataBaseViewModel,
+                    modifier = Modifier.padding( bottom = innerPadding.calculateBottomPadding())
                 )
 
                 BackHandler (true){

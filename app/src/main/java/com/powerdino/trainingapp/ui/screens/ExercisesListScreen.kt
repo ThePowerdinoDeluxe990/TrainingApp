@@ -1,6 +1,8 @@
 package com.powerdino.trainingapp.ui.screens
 
 import android.content.res.Configuration
+import android.widget.Toast
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,6 +21,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -38,9 +41,12 @@ fun ExercisesListScreen(
     navController: NavHostController,
     exerciseViewModel: ExerciseViewModel,
     titleArgument:String,
-    dataBaseViewModel: ExerciseDbViewModel?
+    dataBaseViewModel: ExerciseDbViewModel?,
+    modifier: Modifier
 ) {
     val coroutineScope  = rememberCoroutineScope()
+    val localContext = LocalContext.current
+
     Scaffold (
         topBar ={
             TopAppBar(
@@ -49,9 +55,9 @@ fun ExercisesListScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ){
                         IconButton(
-                        onClick = {
-                            navController.navigate(NavAppScreens.TrainingScreen.route)
-                        }
+                            onClick = {
+                                navController.navigate(NavAppScreens.TrainingScreen.route)
+                            }
                     ) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
@@ -64,40 +70,52 @@ fun ExercisesListScreen(
             )
         }
     ){ innerPadding ->
-        LazyColumn (
-            modifier = Modifier.padding(innerPadding)
-        ){
-            items(exerciseViewModel.currentList){ item ->
-                TrainingMenuComposable(
-                    trainingName = item.nameOf,
-                    trainingDescription = item.descriptionOfExercise,
-                    trainingDifficulty = item.difficultyLevel,
-                    borderColor = Color(item.borderColor),
-                    borderSize = 2.dp,
-                    clickAction = {
-                        navController.navigate(
-                            route = NavAppScreens.ExerciseScreen.route+"/${item.nameOf}/${item.difficultyLevel}/${item.pictureExercise}/${item.repes}"
-                        )
-                    },
-                    starAction = {
-                        coroutineScope.launch{
-                            dataBaseViewModel?.insertItem(
-                                item = ExerciseEntity(
-                                    difficultyLevel = item.difficultyLevel,
-                                    nameOf = item.nameOf,
-                                    descriptionOfExercise = item.descriptionOfExercise,
-                                    pictureExercise = item.pictureExercise,
-                                    borderColor = item.borderColor,
-                                    id = item.id,
-                                    repets = item.repes
-                                )
+        Column(
+            modifier = modifier
+        )
+        {
+
+            LazyColumn(
+                modifier = Modifier
+                    .padding(top = innerPadding.calculateTopPadding())
+            ) {
+                items(exerciseViewModel.currentList) { item ->
+                    TrainingMenuComposable(
+                        trainingName = item.nameOf,
+                        trainingDescription = item.descriptionOfExercise,
+                        trainingDifficulty = item.difficultyLevel,
+                        borderColor = Color(item.borderColor),
+                        borderSize = 2.dp,
+                        clickAction = {
+                            navController.navigate(
+                                route = NavAppScreens.ExerciseScreen.route + "/${item.nameOf}/${item.difficultyLevel}/${item.pictureExercise}/${item.repes}"
                             )
-                        }
-                    },
-                    enableOrDisableStar = true,
-                    enableOrDisableDelete = false,
-                    deleteAction = {}
-                )
+                        },
+                        starAction = {
+                            Toast.makeText(
+                                localContext,
+                                "Starred!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            coroutineScope.launch {
+                                dataBaseViewModel?.insertItem(
+                                    item = ExerciseEntity(
+                                        difficultyLevel = item.difficultyLevel,
+                                        nameOf = item.nameOf,
+                                        descriptionOfExercise = item.descriptionOfExercise,
+                                        pictureExercise = item.pictureExercise,
+                                        borderColor = item.borderColor,
+                                        id = item.id,
+                                        repets = item.repes
+                                    )
+                                )
+                            }
+                        },
+                        enableOrDisableStar = true,
+                        enableOrDisableDelete = false,
+                        deleteAction = {}
+                    )
+                }
             }
         }
     }
@@ -132,7 +150,8 @@ private fun Preview() {
                 navController = rememberNavController(),
                 exerciseViewModel = ExerciseViewModel(),
                 titleArgument = "Example Title",
-                dataBaseViewModel = null
+                dataBaseViewModel = null,
+                modifier = Modifier
             )
         }
     }

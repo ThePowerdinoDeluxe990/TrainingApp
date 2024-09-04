@@ -40,12 +40,13 @@ fun TrainingMenuComposable(
     starAction:() -> Unit,
     deleteAction:() -> Unit,
     enableOrDisableStar:Boolean,
-    enableOrDisableDelete:Boolean
+    enableOrDisableDelete:Boolean,
 ){
     Card (
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
         ),
+
         border = BorderStroke(
             borderSize,
             borderColor
@@ -55,14 +56,16 @@ fun TrainingMenuComposable(
             .padding(10.dp),
         onClick = clickAction
     ){
-        Column (
+
+        Column(
             modifier = Modifier.padding(5.dp)
-        ){
+
+        ) {
             Text(
                 text = trainingName,
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding( 6.dp)
+                modifier = Modifier.padding(6.dp)
             )
 
             trainingDifficulty?.let {
@@ -70,55 +73,55 @@ fun TrainingMenuComposable(
                     text = it,
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding( 6.dp)
+                    modifier = Modifier.padding(6.dp)
                 )
             }
 
             Text(
                 text = trainingDescription,
-                style = MaterialTheme.typography.bodyLarge ,
-                modifier = Modifier.padding( 6.dp)
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(6.dp)
             )
 
-            if(enableOrDisableStar){
+            if (enableOrDisableStar) {
                 Button(
                     onClick = starAction,
                     modifier = Modifier.padding(5.dp)
                 ) {
-                    Row (
+                    Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
-                    ){
+                    ) {
                         Icon(
                             imageVector = Icons.Outlined.Star,
                             contentDescription = stringResource(id = R.string.add_to_star),
                             tint = Color.Yellow,
                         )
 
-                        Spacer( modifier = Modifier.padding(2.dp))
+                        Spacer(modifier = Modifier.padding(2.dp))
 
                         Text("Star")
                     }
                 }
             }
 
-            if(enableOrDisableDelete){
+            if (enableOrDisableDelete) {
                 Button(
                     onClick = deleteAction,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.error
                     )
                 ) {
-                    Row (
+                    Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
-                    ){
+                    ) {
                         Icon(
                             imageVector = Icons.Outlined.Delete,
                             contentDescription = stringResource(id = R.string.add_to_star),
                         )
 
-                        Spacer( modifier = Modifier.padding(2.dp))
+                        Spacer(modifier = Modifier.padding(2.dp))
 
                         Text("Delete")
                     }
@@ -128,6 +131,7 @@ fun TrainingMenuComposable(
         }
     }
 }
+
 
 @Preview(showBackground = true, device = "id:pixel_tablet")
 @Preview(showBackground = true, device = "id:pixel_7")

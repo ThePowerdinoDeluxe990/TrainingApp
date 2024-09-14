@@ -29,7 +29,8 @@ class DaoTest{
         nameOf = "Exercise 1",
         borderColor = 12,
         pictureExercise = 12,
-        descriptionOfExercise = "Lorem Ipsum"
+        descriptionOfExercise = "Lorem Ipsum",
+        repets = "10"
     )
 
     private var exercise2 = ExerciseEntity(
@@ -38,7 +39,8 @@ class DaoTest{
         nameOf = "Exercise 2",
         borderColor = 1,
         pictureExercise = 11,
-        descriptionOfExercise = "Lorem Ipsum 1"
+        descriptionOfExercise = "Lorem Ipsum 1",
+        repets = "10"
     )
 
     private suspend fun addOneItemToDb(){

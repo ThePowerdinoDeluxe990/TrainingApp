@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Done
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,6 +34,7 @@ fun ExercisesScreens(
     nameArgument:String,
     imageArgument:Int,
     repes:String,
+    modifier: Modifier,
     iconButtonClick:() -> Unit
 ){
 
@@ -58,8 +61,9 @@ fun ExercisesScreens(
     })
     { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding)
-                .fillMaxSize(),
+            modifier = modifier.padding(innerPadding)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(

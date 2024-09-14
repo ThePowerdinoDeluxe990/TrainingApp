@@ -72,9 +72,7 @@ fun ExercisesListScreen(
     ){ innerPadding ->
         Column(
             modifier = modifier
-        )
-        {
-
+        ) {
             LazyColumn(
                 modifier = Modifier
                     .padding(top = innerPadding.calculateTopPadding())

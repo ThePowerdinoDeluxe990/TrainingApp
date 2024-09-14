@@ -171,6 +171,7 @@ fun TrainingAppScaffold(
                     nameArgument = it.arguments?.getString("Name")!!,
                     imageArgument = it.arguments?.getInt("Image")!!,
                     repes = it.arguments?.getString("Repes")!!,
+                    modifier = Modifier.padding( innerPadding),
                     iconButtonClick = {
                         Toast.makeText(
                             context,

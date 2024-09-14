@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.compose.material3.Icon
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
@@ -14,6 +16,8 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -45,7 +49,8 @@ import com.powerdino.trainingapp.ui.theme.TrainingAppTheme
 @Composable
 fun TrainingAppScaffold(
     navViewModel: ExerciseViewModel = viewModel(),
-    dataBaseViewModel:ExerciseDbViewModel = viewModel(factory = ExerciseDbViewModel.factory)
+    dataBaseViewModel:ExerciseDbViewModel = viewModel(factory = ExerciseDbViewModel.factory),
+    windowSizeClass: WindowWidthSizeClass
 ){
     val navController = rememberNavController()
     val context = LocalContext.current
@@ -107,7 +112,9 @@ fun TrainingAppScaffold(
                 TrainingScreen(
                     navController,
                     exerciseViewModel = navViewModel,
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier.padding(innerPadding),
+                    windowWidthSizeClass = windowSizeClass,
+                    dataBaseViewModel = dataBaseViewModel
                 )
                 BackHandler(true){
                     val activity = (context as? Activity)
@@ -188,12 +195,3 @@ fun TrainingAppScaffold(
     }
 }
 
-
-@Preview(showBackground = true, device = "id:pixel_tablet")
-@Preview(showBackground = true, device = "id:pixel_7")
-@Composable
-private fun Preview() {
-    TrainingAppTheme {
-        TrainingAppScaffold()
-    }
-}

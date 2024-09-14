@@ -1,7 +1,6 @@
 package com.powerdino.trainingapp
 
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -21,7 +20,9 @@ class NavigationTest {
     @Test
     fun testBottomBar(){
         composeTestRule.setContent {
-            TrainingAppScaffold()
+            TrainingAppScaffold(
+                windowSizeClass = WindowWidthSizeClass.Medium
+            )
         }
 
         composeTestRule.onNodeWithText("My trainings").performClick()
@@ -31,7 +32,9 @@ class NavigationTest {
     @Test
     fun testBottomBarIcons(){
         composeTestRule.setContent {
-            TrainingAppScaffold()
+            TrainingAppScaffold(
+                windowSizeClass = WindowWidthSizeClass.Medium
+            )
         }
 
         composeTestRule.onNodeWithText("My trainings").performClick()

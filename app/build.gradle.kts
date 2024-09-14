@@ -60,7 +60,7 @@ dependencies {
     implementation(libs.androidx.junit.ktx)
     testImplementation(libs.androidx.runner)
     ksp(libs.androidx.room.compiler)
-
+    implementation(libs.androidx.material3.window.size)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
